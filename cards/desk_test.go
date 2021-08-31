@@ -21,6 +21,19 @@ func TestNewDeck(t *testing.T) {
 	}
 }
 
+func TestDealCards(t *testing.T) {
+	d := newDeck()
+	hand, remainingDeck := deal(d, 3)
+
+	if len(hand) != 3 {
+		t.Errorf("Expected hand to contain 3 cards, but got '%v'", len(hand))
+	}
+
+	if len(remainingDeck) != len(d)-len(hand) {
+		t.Errorf("Expected hand to contain '%v' cards, but got '%v'", len(d)-len(hand), len(remainingDeck))
+	}
+}
+
 func TestSaveToDeckAndNewDeckFromFile(t *testing.T) {
 	os.Remove("_decktesting")
 
